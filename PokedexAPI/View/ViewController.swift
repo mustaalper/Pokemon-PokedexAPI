@@ -44,6 +44,15 @@ class ViewController: UIViewController {
         pokeCollectionView.delegate = self
         pokeCollectionView.dataSource = self
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let indeks = sender as! Int
+                
+        let destVC = segue.destination as! DetailViewController
+        let destC = pokemonListViewModel.pokemonSelectIndex(indeks)
+                
+        destVC.result = destC.pokemon
+    }
 }
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -75,8 +84,10 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let poke = self.pokemonListViewModel.pokemonSelectIndex(indexPath.row)
-        print("\(indexPath.row) - \(poke.name)")
+        //let poke = self.pokemonListViewModel.pokemonSelectIndex(indexPath.row)
+        //print("\(indexPath.row) - \(poke.name)")
+        performSegue(withIdentifier: "toDetail", sender: indexPath.item)
+        
     }
 
 }

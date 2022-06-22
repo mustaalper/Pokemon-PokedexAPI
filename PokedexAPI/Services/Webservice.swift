@@ -29,4 +29,25 @@ class Webservice {
             }
         }.resume()
     }
+    
+    func parsePokeDetail(url: URL, comp: @escaping (PokemonDetail) -> ()) {
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if error != nil {
+                print(error?.localizedDescription ?? "n/a")
+                return
+            }
+            
+            guard let _ = response else { return }
+            
+            guard let data = data else { return }
+            
+            do {
+                let pokeDetail = try JSONDecoder().decode(PokemonDetail.self, from: data)
+                comp(pokeDetail)
+            } catch {
+                
+            }
+        }.resume()
+    }
 }
