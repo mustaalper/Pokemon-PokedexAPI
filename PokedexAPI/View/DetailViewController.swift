@@ -13,7 +13,8 @@ class DetailViewController: UIViewController {
     var detailResult: PokemonDetail?
     let parser = Webservice()
     
-    private var pokemonListViewModel: PokemonListViewModel!
+    //private var pokemonListViewModel: PokemonListViewModel!
+    private var pokePageViewModel: PokePageViewModel!
     private var pokemonViewModel: PokemonViewModel!
     private var pokemonDetailViewModel: PokemonDetailViewModel!
     
@@ -44,7 +45,6 @@ class DetailViewController: UIViewController {
                     self.pokeSpAttack.text = "Sp-Attack: \(self.pokemonDetailViewModel.specialAttack)"
                     self.pokeSpDefense.text = "Sp-Defense: \(self.pokemonDetailViewModel.specialDefense)"
                     self.pokeImage.load(urlString: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(self.pokemonDetailViewModel.id).png")
-                    print(self.pokemonDetailViewModel.hp)
                 }
             }
         }

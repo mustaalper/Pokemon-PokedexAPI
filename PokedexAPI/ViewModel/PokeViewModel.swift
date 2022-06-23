@@ -6,21 +6,23 @@
 //
 
 import Foundation
+import UIKit
 
-struct PokemonListViewModel {
-    let pokeList: [PokeResult]
+class PokePageViewModel {
+    var page = 0
+    var pokemons = [PokeResult]()
     
-    func numberOfItemSection() -> Int {
-        return self.pokeList.count
+    func fetchData(page: Int, cv: UICollectionView) {
+        Webservice.shared.fetchData(page: page) { pokemons in
+            self.pokemons = pokemons
+            DispatchQueue.main.async {
+                cv.reloadData()
+            }
+        }
     }
     
-    func pokemonAtIndex(_ index: Int) -> PokemonViewModel {
-        let poke = self.pokeList[index]
-        return PokemonViewModel(poke)
-    }
-        
     func pokemonSelectIndex(_ index: Int) -> PokemonViewModel{
-        let select = self.pokeList[index]
+        let select = self.pokemons[index]
         return PokemonViewModel(select)
     }
 }

@@ -8,8 +8,40 @@
 import Foundation
 
 class Webservice {
+    
+    static let shared = Webservice()
+    var pokemon = [PokeResult]()
+    
+    func fetchData(page: Int, comp: @escaping ([PokeResult]) -> ()) {
+        guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon?offset=\(page)") else { return }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            guard let data = data else { return }
+            
+            var result: PokemonModel?
+            do {
+                result = try JSONDecoder().decode(PokemonModel.self, from: data)
+            }
+            catch {
+                print("error")
+            }
+                
+            let nPoke = result?.results
+            self.pokemon.append(contentsOf: nPoke!)
+            comp(self.pokemon)
+                
+        }.resume()
+            
+    }
+    
     func parsePoke(comp: @escaping ([PokeResult]) -> ()) {
-        let api = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=10228")!
+        let api = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=10")!
         
         URLSession.shared.dataTask(with: api) { data, response, error in
             if error != nil {

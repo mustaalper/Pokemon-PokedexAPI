@@ -25,4 +25,10 @@ class PokemonCollectionViewCell: UICollectionViewCell {
         pokeName.backgroundColor = .systemPink
         pokeName.textColor = .white
     }
+    
+    func configure(with model: PokeResult, cellID: Int) {
+        self.pokeName.text = model.name.capitalized
+            
+        self.pokeImg.load(urlString: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(cellID).png")
+        }
 }
