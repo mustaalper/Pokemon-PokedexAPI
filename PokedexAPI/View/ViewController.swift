@@ -22,12 +22,12 @@ class ViewController: UIViewController {
         pokeCollectionView.dataSource = self
         
         let desing: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-                let width = self.pokeCollectionView.frame.size.width
-                desing.sectionInset = UIEdgeInsets(top: 10, left: 2, bottom: 2, right: 2)
-                desing.minimumInteritemSpacing = 5
-                desing.minimumLineSpacing = 5
-                let cellWidth = (width - 24) / 3
-                desing.itemSize = CGSize(width: cellWidth, height: cellWidth * 1.5)
+            let width = UIScreen.main.bounds.width
+            desing.sectionInset = UIEdgeInsets(top: 10, left: 2, bottom: 2, right: 2)
+            desing.minimumInteritemSpacing = 5
+            desing.minimumLineSpacing = 5
+            let cellWidth = (width - 14) / 3
+            desing.itemSize = CGSize(width: cellWidth, height: cellWidth * 1.5)
                 
         pokeCollectionView!.collectionViewLayout = desing
         
@@ -64,20 +64,11 @@ extension ViewController: UICollectionViewDelegate {
     }
 }
 
-extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension ViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return pokemonListViewModel.pokemons.count
     }
-    
-    /*func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 32, left: 8, bottom: 8, right: 8)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth = (view.frame.width - 36) / 3
-        return CGSize(width: cellWidth, height: cellWidth)
-    }*/
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = pokeCollectionView.dequeueReusableCell(withReuseIdentifier: pokeCellId, for: indexPath) as! PokemonCollectionViewCell

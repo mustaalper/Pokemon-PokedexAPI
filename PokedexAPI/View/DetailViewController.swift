@@ -12,9 +12,7 @@ class DetailViewController: UIViewController {
     var result: PokeResult?
     var detailResult: PokemonDetail?
     let parser = Webservice()
-    
-    //private var pokemonListViewModel: PokemonListViewModel!
-    //private var pokemonViewModel: PokemonViewModel!
+
     private var pokemonDetailViewModel: PokemonDetailViewModel!
     
     @IBOutlet var pokeImage: UIImageView!
