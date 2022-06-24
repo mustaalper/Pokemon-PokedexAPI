@@ -12,7 +12,7 @@ class Webservice {
     static let shared = Webservice()
     var pokemon = [PokeResult]()
     
-    func fetchData(page: Int, comp: @escaping ([PokeResult]) -> ()) {
+    func parsePoke(page: Int, comp: @escaping ([PokeResult]) -> ()) {
         guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon?offset=\(page)") else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -38,28 +38,6 @@ class Webservice {
                 
         }.resume()
             
-    }
-    
-    func parsePoke(comp: @escaping ([PokeResult]) -> ()) {
-        let api = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=10")!
-        
-        URLSession.shared.dataTask(with: api) { data, response, error in
-            if error != nil {
-                print(error?.localizedDescription ?? "n/a")
-                return
-            }
-            
-            guard let _ = response else { return }
-            
-            guard let data = data else { return }
-
-            do {
-                let jsonResult = try JSONDecoder().decode(PokemonModel.self, from: data)
-                comp(jsonResult.results)
-            } catch {
-                
-            }
-        }.resume()
     }
     
     func parsePokeDetail(url: URL, comp: @escaping (PokemonDetail) -> ()) {

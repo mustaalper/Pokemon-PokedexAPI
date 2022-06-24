@@ -14,8 +14,7 @@ class DetailViewController: UIViewController {
     let parser = Webservice()
     
     //private var pokemonListViewModel: PokemonListViewModel!
-    private var pokePageViewModel: PokePageViewModel!
-    private var pokemonViewModel: PokemonViewModel!
+    //private var pokemonViewModel: PokemonViewModel!
     private var pokemonDetailViewModel: PokemonDetailViewModel!
     
     @IBOutlet var pokeImage: UIImageView!
@@ -38,12 +37,12 @@ class DetailViewController: UIViewController {
                 self.pokemonDetailViewModel = PokemonDetailViewModel(pokemonDetail: data)
                 DispatchQueue.main.async {
                     self.pokeType.text = "Type: \(self.pokemonDetailViewModel.type.capitalized)"
-                    self.pokeHealt.text = "Healt: \(self.pokemonDetailViewModel.hp)"
-                    self.pokeAttack.text = "Attack: \(self.pokemonDetailViewModel.attack)"
-                    self.pokeDefense.text = "Defense: \(self.pokemonDetailViewModel.defense)"
-                    self.pokeSpeed.text = "Speed: \(self.pokemonDetailViewModel.speed)"
-                    self.pokeSpAttack.text = "Sp-Attack: \(self.pokemonDetailViewModel.specialAttack)"
-                    self.pokeSpDefense.text = "Sp-Defense: \(self.pokemonDetailViewModel.specialDefense)"
+                    self.pokeHealt.text = "Healt: \(self.pokemonDetailViewModel.stats(prop: "", propCase: "hp"))"
+                    self.pokeAttack.text = "Attack: \(self.pokemonDetailViewModel.stats(prop: "", propCase: "attack"))"
+                    self.pokeDefense.text = "Defense: \(self.pokemonDetailViewModel.stats(prop: "", propCase: "defense"))"
+                    self.pokeSpeed.text = "Speed: \(self.pokemonDetailViewModel.stats(prop: "", propCase: "speed"))"
+                    self.pokeSpAttack.text = "Sp-Attack: \(self.pokemonDetailViewModel.stats(prop: "", propCase: "special-attack"))"
+                    self.pokeSpDefense.text = "Sp-Defense: \(self.pokemonDetailViewModel.stats(prop: "", propCase: "special-defense"))"
                     self.pokeImage.load(urlString: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(self.pokemonDetailViewModel.id).png")
                 }
             }
