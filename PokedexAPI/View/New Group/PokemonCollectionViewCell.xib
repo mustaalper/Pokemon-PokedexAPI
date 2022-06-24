@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5f4-PG-2QP">
-                        <rect key="frame" x="20" y="0.0" width="161" height="161"/>
+                        <rect key="frame" x="0.0" y="0.0" width="201" height="161"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCy-SK-4GY">
                         <rect key="frame" x="0.0" y="169" width="201" height="32"/>
@@ -30,11 +30,11 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstItem="XCy-SK-4GY" firstAttribute="top" secondItem="5f4-PG-2QP" secondAttribute="bottom" constant="8" id="1uB-sC-SpD"/>
-                <constraint firstAttribute="trailing" secondItem="5f4-PG-2QP" secondAttribute="trailing" constant="20" id="MHb-aK-q0e"/>
+                <constraint firstAttribute="trailing" secondItem="5f4-PG-2QP" secondAttribute="trailing" id="MHb-aK-q0e"/>
                 <constraint firstAttribute="bottom" secondItem="5f4-PG-2QP" secondAttribute="bottom" constant="40" id="Oez-9M-Cgg"/>
                 <constraint firstItem="5f4-PG-2QP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="PFT-Qh-Cs1"/>
                 <constraint firstAttribute="trailing" secondItem="XCy-SK-4GY" secondAttribute="trailing" id="Rpn-Nd-Ftd"/>
-                <constraint firstItem="5f4-PG-2QP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="X0f-4I-iH2"/>
+                <constraint firstItem="5f4-PG-2QP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="X0f-4I-iH2"/>
                 <constraint firstAttribute="bottom" secondItem="XCy-SK-4GY" secondAttribute="bottom" id="eyR-hz-BdJ"/>
                 <constraint firstItem="XCy-SK-4GY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="gJf-Cr-7EC"/>
             </constraints>

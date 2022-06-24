@@ -6,21 +6,23 @@
 //
 
 import Foundation
+import UIKit
 
-struct PokemonListViewModel {
-    let pokeList: [PokeResult]
+class PokemonListViewModel {
+    var page = 0
+    var pokemons = [PokeResult]()
     
-    func numberOfItemSection() -> Int {
-        return self.pokeList.count
+    func fetchData(page: Int, cv: UICollectionView) {
+        Webservice.shared.parsePoke(page: page) { pokemons in
+            self.pokemons = pokemons
+            DispatchQueue.main.async {
+                cv.reloadData()
+            }
+        }
     }
     
-    func pokemonAtIndex(_ index: Int) -> PokemonViewModel {
-        let poke = self.pokeList[index]
-        return PokemonViewModel(poke)
-    }
-        
     func pokemonSelectIndex(_ index: Int) -> PokemonViewModel{
-        let select = self.pokeList[index]
+        let select = self.pokemons[index]
         return PokemonViewModel(select)
     }
 }
@@ -38,7 +40,7 @@ struct PokemonViewModel {
 }
 
 struct PokemonDetailViewModel {
-    let pokemonDetail: PokemonDetail
+    var pokemonDetail: PokemonDetail!
     
     var id: Int {
         return pokemonDetail.id
@@ -48,93 +50,34 @@ struct PokemonDetailViewModel {
         return pokemonDetail.types.first?.type.name ?? "n/a"
     }
     
-    var hp: String {
-        var propHp = ""
+    func stats(prop: String, propCase: String) -> String {
+        var prop = ""
         
         for i in 0..<pokemonDetail.stats.count {
             let x = pokemonDetail.stats[i].stat.name
             switch x {
-            case "hp":
-                propHp = "\(pokemonDetail.stats[i].baseStat)"
+            case propCase:
+                prop = "\(pokemonDetail.stats[i].baseStat)"
             default:
                 break
             }
         }
-        return propHp
+        return prop
     }
     
-    var attack: String {
-        var propAtt = ""
-        
-        for i in 0..<pokemonDetail.stats.count {
-            let x = pokemonDetail.stats[i].stat.name
-            switch x {
-            case "attack":
-                propAtt = "\(pokemonDetail.stats[i].baseStat)"
-            default:
-                break
-            }
+    func backgroundColor(forType type: String) -> UIColor {
+        switch type {
+        case "fire": return .systemRed
+        case "poison": return .systemGreen
+        case "grass": return .systemGreen
+        case "water": return .systemBlue
+        case "electric": return .systemYellow
+        case "psychic": return .systemPurple
+        case "normal": return .systemOrange
+        case "ground": return .systemGray
+        case "flying": return .systemTeal
+        case "fairy": return .systemPink
+        default: return .systemIndigo
         }
-        return propAtt
-    }
-    
-    var defense: String {
-        var propDef = ""
-        
-        for i in 0..<pokemonDetail.stats.count {
-            let x = pokemonDetail.stats[i].stat.name
-            switch x {
-            case "defense":
-                propDef = "\(pokemonDetail.stats[i].baseStat)"
-            default:
-                break
-            }
-        }
-        return propDef
-    }
-    
-    var specialAttack: String {
-        var propSpAtt = ""
-        
-        for i in 0..<pokemonDetail.stats.count {
-            let x = pokemonDetail.stats[i].stat.name
-            switch x {
-            case "special-attack":
-                propSpAtt = "\(pokemonDetail.stats[i].baseStat)"
-            default:
-                break
-            }
-        }
-        return propSpAtt
-    }
-    
-    var specialDefense: String {
-        var propSpDef = ""
-        
-        for i in 0..<pokemonDetail.stats.count {
-            let x = pokemonDetail.stats[i].stat.name
-            switch x {
-            case "special-defense":
-                propSpDef = "\(pokemonDetail.stats[i].baseStat)"
-            default:
-                break
-            }
-        }
-        return propSpDef
-    }
-    
-    var speed: String {
-        var propSp = ""
-        
-        for i in 0..<pokemonDetail.stats.count {
-            let x = pokemonDetail.stats[i].stat.name
-            switch x {
-            case "speed":
-                propSp = "\(pokemonDetail.stats[i].baseStat)"
-            default:
-                break
-            }
-        }
-        return propSp
     }
 }
