@@ -34,6 +34,7 @@ class DetailViewController: UIViewController {
                 self.detailResult = data
                 self.pokemonDetailViewModel = PokemonDetailViewModel(pokemonDetail: data)
                 DispatchQueue.main.async {
+                    self.view.backgroundColor = self.pokemonDetailViewModel.backgroundColor(forType: self.pokemonDetailViewModel.type)
                     self.pokeType.text = "Type: \(self.pokemonDetailViewModel.type.capitalized)"
                     self.pokeHealt.text = "Healt: \(self.pokemonDetailViewModel.stats(prop: "", propCase: "hp"))"
                     self.pokeAttack.text = "Attack: \(self.pokemonDetailViewModel.stats(prop: "", propCase: "attack"))"

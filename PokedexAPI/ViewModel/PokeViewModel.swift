@@ -40,7 +40,7 @@ struct PokemonViewModel {
 }
 
 struct PokemonDetailViewModel {
-    let pokemonDetail: PokemonDetail
+    var pokemonDetail: PokemonDetail!
     
     var id: Int {
         return pokemonDetail.id
@@ -63,5 +63,21 @@ struct PokemonDetailViewModel {
             }
         }
         return prop
+    }
+    
+    func backgroundColor(forType type: String) -> UIColor {
+        switch type {
+        case "fire": return .systemRed
+        case "poison": return .systemGreen
+        case "grass": return .systemGreen
+        case "water": return .systemBlue
+        case "electric": return .systemYellow
+        case "psychic": return .systemPurple
+        case "normal": return .systemOrange
+        case "ground": return .systemGray
+        case "flying": return .systemTeal
+        case "fairy": return .systemPink
+        default: return .systemIndigo
+        }
     }
 }
